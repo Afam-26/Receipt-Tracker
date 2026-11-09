@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Build outputs
+dist/
+build/
+coverage/
+.expo/
+.expo-shared/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Operating system
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# TypeScript
+*.tsbuildinfo
