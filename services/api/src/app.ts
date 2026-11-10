@@ -6,12 +6,15 @@ import { registerAuthRoutes } from './auth/routes.js';
 import type { AuthServices } from './auth/types.js';
 import type { GroceryStore } from './grocery/store.js';
 import { registerGroceryRoutes } from './grocery/routes.js';
+import type { GasStore } from './gas/store.js';
+import { registerGasRoutes } from './gas/routes.js';
 
-export function createApp({ database, registerRoutes, auth, grocery }: {
+export function createApp({ database, registerRoutes, auth, grocery, gas }: {
   database: DatabaseProbe;
   registerRoutes?: (app: Express) => void;
   auth?: AuthServices;
   grocery?: GroceryStore;
+  gas?: GasStore;
 }): Express {
   const app = express();
   app.disable('x-powered-by');
@@ -37,6 +40,7 @@ export function createApp({ database, registerRoutes, auth, grocery }: {
 
   if (auth) registerAuthRoutes(app, auth);
   if (auth && grocery) registerGroceryRoutes(app, auth, grocery);
+  if (auth && gas) registerGasRoutes(app, auth, gas);
   registerRoutes?.(app);
   app.use(notFound);
   app.use(errorHandler);
