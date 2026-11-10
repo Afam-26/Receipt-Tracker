@@ -5,6 +5,7 @@ import { createUserStore } from './db/user-store.js';
 import { createClerkProvider } from './auth/clerk.js';
 import { createGroceryStore } from './grocery/store.js';
 import { createGasStore } from './gas/store.js';
+import {createAnalyticsStore} from './analytics/store.js';
 
 const config = readConfig();
 const database = createDatabaseProbe(config.databaseUrl);
@@ -18,7 +19,8 @@ const provider = createClerkProvider({
 });
 const grocery = createGroceryStore(config.databaseUrl);
 const gas = createGasStore(config.databaseUrl);
-const app = createApp({ database, auth: { provider, store: userStore }, grocery, gas });
+const analytics = createAnalyticsStore(config.databaseUrl);
+const app = createApp({ database, auth: { provider, store: userStore }, grocery, gas, analytics });
 const server = app.listen(config.port, '0.0.0.0', () => {
   console.log(`Receipt Tracker API listening on port ${config.port}`);
 });
@@ -30,7 +32,7 @@ async function shutdown(signal: string): Promise<void> {
   console.log(`Shutting down API (${signal})`);
   // Stop accepting connections. Existing requests can finish.
   server.close(async (error) => {
-    try { await Promise.all([database.close(), userStore.close(), grocery.close(), gas.close()]); }
+    try { await Promise.all([database.close(), userStore.close(), grocery.close(), gas.close(), analytics.close()]); }
     catch { process.exitCode = 1; }
     if (error) process.exitCode = 1;
   });

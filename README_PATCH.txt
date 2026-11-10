@@ -1,15 +1,15 @@
-Receipt Price Tracker Phase 2B.4 gas API patch
+Receipt Price Tracker — Phase 2B.5 Advanced Analytics
 
-Extract from the project root using:
-  unzip -o ~/Downloads/receipt-tracker-phase-2b4-gas-patch.zip -d .
+Install in your existing project root using unzip -o. This patch modifies
+services/api/src/app.ts and services/api/src/server.ts and adds the analytics
+module, two test files, and docs/PHASE_2B5.md.
 
-Files modified: services/api/src/app.ts, services/api/src/server.ts
-Files added: services/api/src/gas/*, services/api/tests/gas*.test.ts, docs/PHASE_2B4.md, scripts/seed-fuel-grades.sql
+No database changes, package.json changes, or .env changes.
 
-No migrations or database changes are executed by installing this patch.
-The existing database/schema and grocery routes are preserved.
+On your Mac run:
+  npm run typecheck --workspace @receipt-tracker/api
+  npm run test --workspace @receipt-tracker/api
+  npm run db:check
+  npm audit
 
-Before install: commit or back up your working repository.
-After install: npm install; npm run typecheck --workspace @receipt-tracker/api; npm run test --workspace @receipt-tracker/api; npm run db:check; npm audit.
-
-Tests were authored but not run in this environment because npm installation timed out; you must run them locally before considering the patch validated.
+Read docs/PHASE_2B5.md for endpoints and data limitations.
