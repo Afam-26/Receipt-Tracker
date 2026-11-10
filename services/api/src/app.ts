@@ -10,14 +10,22 @@ import type { GasStore } from './gas/store.js';
 import { registerGasRoutes } from './gas/routes.js';
 import {registerAnalyticsRoutes} from './analytics/routes.js';
 import type {AnalyticsStore} from './analytics/store.js';
+import { registerReceiptRoutes, type ReceiptServices } from './receipts/routes.js';
+import { registerOcrRoutes } from './ocr/routes.js';
+import type { OcrStore } from './ocr/store.js';
+import type { ReviewStore } from './review/store.js';
+import { registerReviewRoutes } from './review/routes.js';
 
-export function createApp({ database, registerRoutes, auth, grocery, gas, analytics }: {
+export function createApp({ database, registerRoutes, auth, grocery, gas, analytics, receipts, ocr, review }: {
   database: DatabaseProbe;
   registerRoutes?: (app: Express) => void;
   auth?: AuthServices;
   grocery?: GroceryStore;
   gas?: GasStore;
   analytics?: AnalyticsStore;
+  receipts?: ReceiptServices;
+  ocr?: OcrStore;
+  review?: ReviewStore;
 }): Express {
   const app = express();
   app.disable('x-powered-by');
@@ -45,6 +53,9 @@ export function createApp({ database, registerRoutes, auth, grocery, gas, analyt
   if (auth && grocery) registerGroceryRoutes(app, auth, grocery);
   if (auth && gas) registerGasRoutes(app, auth, gas);
   if (auth && analytics && gas) registerAnalyticsRoutes(app, auth, analytics, gas);
+  if (auth && receipts) registerReceiptRoutes(app, auth, receipts);
+  if (auth && ocr) registerOcrRoutes(app, auth, ocr);
+  if (auth && review) registerReviewRoutes(app, auth, review);
   registerRoutes?.(app);
   app.use(notFound);
   app.use(errorHandler);

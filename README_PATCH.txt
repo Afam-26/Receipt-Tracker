@@ -1,15 +1,5 @@
-Receipt Price Tracker — Phase 2B.5 Advanced Analytics
-
-Install in your existing project root using unzip -o. This patch modifies
-services/api/src/app.ts and services/api/src/server.ts and adds the analytics
-module, two test files, and docs/PHASE_2B5.md.
-
-No database changes, package.json changes, or .env changes.
-
-On your Mac run:
-  npm run typecheck --workspace @receipt-tracker/api
-  npm run test --workspace @receipt-tracker/api
-  npm run db:check
-  npm audit
-
-Read docs/PHASE_2B5.md for endpoints and data limitations.
+Receipt Price Tracker Phase 3C — OCR Review and Confirmation
+Overlay on the validated Phase 3B (Railway) project. No migration.
+Read docs/PHASE_3C.md; scripts/review-inspect.mjs before confirming any receipt.
+Only 2 existing files changed: services/api/src/app.ts and services/api/src/server.ts.
+New files: services/api/src/review/{validation,routes,store}.ts; services/api/tests/review-*.test.ts; docs/PHASE_3C.md; scripts/review-inspect.mjs

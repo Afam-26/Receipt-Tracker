@@ -6,6 +6,10 @@ import { createClerkProvider } from './auth/clerk.js';
 import { createGroceryStore } from './grocery/store.js';
 import { createGasStore } from './gas/store.js';
 import {createAnalyticsStore} from './analytics/store.js';
+import { createReceiptStore } from './receipts/store.js';
+import { createRailwayBucketStorage, readRailwayBucketSettings } from './receipts/storage.js';
+import { createOcrStore } from './ocr/store.js';
+import { createReviewStore } from './review/store.js';
 
 const config = readConfig();
 const database = createDatabaseProbe(config.databaseUrl);
@@ -20,7 +24,13 @@ const provider = createClerkProvider({
 const grocery = createGroceryStore(config.databaseUrl);
 const gas = createGasStore(config.databaseUrl);
 const analytics = createAnalyticsStore(config.databaseUrl);
-const app = createApp({ database, auth: { provider, store: userStore }, grocery, gas, analytics });
+const bucket=readRailwayBucketSettings();
+// Fail closed: upload routes are not registered until Railway storage is fully configured.
+const receipts=bucket?{store:createReceiptStore(config.databaseUrl),storage:createRailwayBucketStorage(bucket)}:undefined;
+const ocr=bucket?createOcrStore(config.databaseUrl):undefined;
+const review=bucket?createReviewStore(config.databaseUrl):undefined;
+if (!bucket) console.warn('Railway bucket is not configured; receipt upload routes are disabled');
+const app = createApp({ database, auth: { provider, store: userStore }, grocery, gas, analytics, receipts, ocr, review });
 const server = app.listen(config.port, '0.0.0.0', () => {
   console.log(`Receipt Tracker API listening on port ${config.port}`);
 });
@@ -32,7 +42,7 @@ async function shutdown(signal: string): Promise<void> {
   console.log(`Shutting down API (${signal})`);
   // Stop accepting connections. Existing requests can finish.
   server.close(async (error) => {
-    try { await Promise.all([database.close(), userStore.close(), grocery.close(), gas.close(), analytics.close()]); }
+    try { await Promise.all([database.close(), userStore.close(), grocery.close(), gas.close(), analytics.close(), ...(receipts?[receipts.store.close()]:[]), ...(ocr?[ocr.close()]:[]), ...(review?[review.close()]:[])]); }
     catch { process.exitCode = 1; }
     if (error) process.exitCode = 1;
   });
