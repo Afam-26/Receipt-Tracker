@@ -1,0 +1,23 @@
+{
+  "expo": {
+    "name": "Receipt Price Tracker",
+    "slug": "receipt-price-tracker",
+    "scheme": "receipttracker",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.receipttracker.mobile"
+    },
+    "android": {
+      "package": "com.receipttracker.mobile"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      "@clerk/expo",
+      "expo-web-browser"
+    ]
+  }
+}

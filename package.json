@@ -4,12 +4,23 @@
   "version": "0.1.0",
   "type": "module",
   "packageManager": "npm@10.9.2",
-  "workspaces": ["apps/*", "services/*", "packages/*"],
+  "workspaces": [
+    "apps/*",
+    "services/*",
+    "packages/*"
+  ],
   "scripts": {
     "db:migrate": "DOTENV_CONFIG_PATH=../../.env npm run db:migrate --workspace @receipt-tracker/database",
     "db:check": "DOTENV_CONFIG_PATH=../../.env npm run db:check --workspace @receipt-tracker/database",
     "api:dev": "npm run dev --workspace @receipt-tracker/api",
     "check:source": "python3 scripts/legacy-import/audit_prototype.py"
   },
-  "engines": {"node": ">=22"}
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "expo": "~58.0.23",
+    "react": "19.3.0",
+    "react-native": "0.88.1"
+  }
 }

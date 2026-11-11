@@ -1,3 +1,5 @@
-# Mobile app reserved for Phase 3
+# Receipt Price Tracker — Expo iOS and Android (Phase 4A)
 
-The Expo iOS/Android project will be scaffolded in Phase 3, after the database and API are validated. No web UI or prototype HTML has been inserted here.
+This is a foundation only: Clerk hosted sign-in, authenticated API read client, tab navigation, baseline dashboard, and RevenueCat customer identification. No purchases/trials are initiated, no payment screens, no backend entitlement checks, and no backend changes in this phase.
+
+Read `../../docs/PHASE_4A_REVENUECAT.md` and run `bash scripts/setup-mobile-phase4a.sh` from the repository root after extracting the patch.
