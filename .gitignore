@@ -26,3 +26,9 @@ npm-debug.log*
 
 # TypeScript
 *.tsbuildinfo
+
+# Development-generated backups and caches
+*.bak
+*.pyc
+__pycache__/
+scripts/backups/
