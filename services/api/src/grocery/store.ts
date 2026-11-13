@@ -14,6 +14,10 @@ export interface GroceryStore {
   createCategory(userId: string, value: Category): Promise<{ id: string }>;
   listProducts(userId: string, filters: Filters): Promise<unknown[]>;
   createProduct(userId: string, value: Product): Promise<{ id: string }>;
+  // GROCERY_CATEGORY_MANAGER_V1
+  assignProductCategory(userId: string, productId: string, categoryId: string | null): Promise<{ productId: string; categoryId: string | null }>;
+  // GROCERY_PRODUCT_IMPROVEMENTS_V1
+  renameProduct(userId: string, productId: string, name: string): Promise<{ productId: string; canonicalName: string }>;
   listVariants(userId: string, filters: Filters): Promise<unknown[]>;
   createVariant(userId: string, value: Variant): Promise<{ id: string }>;
   listPurchases(userId: string, filters: Filters): Promise<unknown[]>;
@@ -69,6 +73,34 @@ export function createGroceryStore(databaseUrl: string): GroceryStore {
           [userId, v.canonicalName, v.brand, v.categoryId]);
         return { id: asId(r.insertId) };
       } finally { cx.release(); }
+    },
+    // GROCERY_CATEGORY_MANAGER_V1: verify both IDs under the same Clerk-owned local user.
+    async assignProductCategory(userId, productId, categoryId) {
+      const cx = await pool.getConnection();
+      try {
+        await cx.beginTransaction();
+        const [products] = await cx.execute<Row[]>(
+          'SELECT id FROM products WHERE user_id = ? AND id = ? FOR UPDATE', [userId, productId]);
+        if (!products.length) throw new HttpError(404, 'PRODUCT_NOT_FOUND', 'Product not found');
+        if (categoryId !== null) {
+          const [categories] = await cx.execute<Row[]>(
+            'SELECT id FROM categories WHERE user_id = ? AND id = ? LIMIT 1', [userId, categoryId]);
+          if (!categories.length) throw new HttpError(404, 'CATEGORY_NOT_FOUND', 'Category not found');
+        }
+        await cx.execute('UPDATE products SET category_id = ? WHERE user_id = ? AND id = ?',
+          [categoryId, userId, productId]);
+        await cx.commit();
+        return { productId, categoryId };
+      } catch (error) { await cx.rollback(); throw error; }
+      finally { cx.release(); }
+    },
+    // GROCERY_PRODUCT_IMPROVEMENTS_V1: only rename a product owned by current local user.
+    async renameProduct(userId, productId, name) {
+      const [result] = await pool.execute<ResultSetHeader>(
+        'UPDATE products SET canonical_name = ? WHERE user_id = ? AND id = ?',
+        [name, userId, productId]);
+      if (result.affectedRows !== 1) throw new HttpError(404, 'PRODUCT_NOT_FOUND', 'Product not found');
+      return { productId, canonicalName: name };
     },
     async listVariants(userId, f) {
       const predicates = ['v.user_id = ?']; const args: Array<string | number> = [userId];

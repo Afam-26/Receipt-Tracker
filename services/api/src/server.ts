@@ -1,3 +1,4 @@
+import { createPool } from 'mysql2/promise';
 import { createApp } from './app.js';
 import { readConfig } from './config/env.js';
 import { createDatabaseProbe } from './db/probe.js';
@@ -10,6 +11,7 @@ import { createReceiptStore } from './receipts/store.js';
 import { createRailwayBucketStorage, readRailwayBucketSettings } from './receipts/storage.js';
 import { createOcrStore } from './ocr/store.js';
 import { createReviewStore } from './review/store.js';
+import { createGroceryDashboardStore } from './grocery/dashboard.js';
 
 const config = readConfig();
 const database = createDatabaseProbe(config.databaseUrl);
@@ -24,13 +26,16 @@ const provider = createClerkProvider({
 const grocery = createGroceryStore(config.databaseUrl);
 const gas = createGasStore(config.databaseUrl);
 const analytics = createAnalyticsStore(config.databaseUrl);
+const groceryDashboard = createGroceryDashboardStore(config.databaseUrl);
+// Utility uses a dedicated pool, following the existing independent-store pattern.
+const utilityPool = createPool({ uri: config.databaseUrl, connectionLimit: 5, waitForConnections: true, timezone: 'Z', decimalNumbers: false });
 const bucket=readRailwayBucketSettings();
 // Fail closed: upload routes are not registered until Railway storage is fully configured.
 const receipts=bucket?{store:createReceiptStore(config.databaseUrl),storage:createRailwayBucketStorage(bucket)}:undefined;
 const ocr=bucket?createOcrStore(config.databaseUrl):undefined;
 const review=bucket?createReviewStore(config.databaseUrl):undefined;
 if (!bucket) console.warn('Railway bucket is not configured; receipt upload routes are disabled');
-const app = createApp({ database, auth: { provider, store: userStore }, grocery, gas, analytics, receipts, ocr, review });
+const app = createApp({ database, auth: { provider, store: userStore }, grocery, gas, analytics, receipts, ocr, review, utilities: {pool: utilityPool} , groceryDashboard });
 const server = app.listen(config.port, '0.0.0.0', () => {
   console.log(`Receipt Tracker API listening on port ${config.port}`);
 });
@@ -42,7 +47,7 @@ async function shutdown(signal: string): Promise<void> {
   console.log(`Shutting down API (${signal})`);
   // Stop accepting connections. Existing requests can finish.
   server.close(async (error) => {
-    try { await Promise.all([database.close(), userStore.close(), grocery.close(), gas.close(), analytics.close(), ...(receipts?[receipts.store.close()]:[]), ...(ocr?[ocr.close()]:[]), ...(review?[review.close()]:[])]); }
+    try { await Promise.all([database.close(), userStore.close(), grocery.close(), gas.close(), analytics.close(), groceryDashboard.close(), utilityPool.end(), ...(receipts?[receipts.store.close()]:[]), ...(ocr?[ocr.close()]:[]), ...(review?[review.close()]:[])]); }
     catch { process.exitCode = 1; }
     if (error) process.exitCode = 1;
   });

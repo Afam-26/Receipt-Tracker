@@ -22,7 +22,7 @@ async function main(){
     const job=await store.claim();
     if(!job){await new Promise(resolve=>setTimeout(resolve,3000));continue;}
     try{const bytes=await bytesFromStorage(job.key);const text=await engine.extract(bytes,job.mimeType);if(text.trim().length<4)throw new Error('OCR returned insufficient text');
-      await store.complete(job,parseReceiptText(text),text);
+      await store.complete(job,parseReceiptText(text,job.receiptType),text);
       console.log('OCR completed', {jobId:job.id,receiptId:job.receiptId});
     }catch(error){console.error('OCR failed', {jobId:job.id,reason:error instanceof Error?error.message:'unknown'});await store.fail(job);}
   }}finally{await store.close();}

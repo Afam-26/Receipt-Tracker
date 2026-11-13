@@ -1,7 +1,13 @@
-RECEIPT TRACKER PHASE 4A EXPO + CLERK + REVENUECAT
+Receipt Price Tracker Phase 4B mobile patch
 
-1. Extract this archive in the root of Receipt Price Tracker.
-2. Run bash scripts/setup-mobile-phase4a.sh from root (requires internet).
-3. Read docs/PHASE_4A_REVENUECAT.md and create apps/mobile/.env with public keys.
-4. No backend files, schema, or existing data are modified.
-5. No real purchases or automatic 7-day trial are implemented. Trial is configured later in Apple/Google stores.
+Files: apps/mobile/src/lib/receipts4b.ts, apps/mobile/src/app/(tabs)/receipts.tsx,
+apps/mobile/src/app/receipt/[id].tsx, docs/PHASE_4B.md
+
+No backend, DB, Clerk or RevenueCat files are changed.
+
+Install from root:
+  unzip -o ~/Downloads/receipt-tracker-phase4b-mobile-capture-review.zip -d .
+  cd apps/mobile && npx expo install expo-image-picker expo-file-system
+  cd ../.. && npm run typecheck --workspace @receipt-tracker/mobile
+
+Read docs/PHASE_4B.md before launching/confirming purchases.

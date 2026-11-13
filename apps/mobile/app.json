@@ -8,7 +8,11 @@
     "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.receipttracker.mobile"
+      "bundleIdentifier": "com.receipttracker.mobile",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Receipt Price Tracker needs camera access to photograph receipts you choose to upload.",
+        "NSPhotoLibraryUsageDescription": "Receipt Price Tracker needs photo library access to select receipt images you choose to upload."
+      }
     },
     "android": {
       "package": "com.receipttracker.mobile"
@@ -17,7 +21,15 @@
       "expo-router",
       "expo-secure-store",
       "@clerk/expo",
-      "expo-web-browser"
+      "expo-web-browser",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Receipt Price Tracker needs photo library access to select receipt images you choose to upload.",
+          "cameraPermission": "Receipt Price Tracker needs camera access to photograph receipts you choose to upload.",
+          "microphonePermission": false
+        }
+      ]
     ]
   }
 }

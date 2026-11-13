@@ -1,8 +1,9 @@
 import { randomUUID } from 'node:crypto';
 import express, { type Express } from 'express';
+import type { Pool } from 'mysql2/promise';
 import type { DatabaseProbe } from './db/probe.js';
 import { errorHandler, notFound } from './http/errors.js';
-import { registerAuthRoutes } from './auth/routes.js';
+import { createRequireUser, type AuthRequest, registerAuthRoutes } from './auth/routes.js';
 import type { AuthServices } from './auth/types.js';
 import type { GroceryStore } from './grocery/store.js';
 import { registerGroceryRoutes } from './grocery/routes.js';
@@ -15,8 +16,10 @@ import { registerOcrRoutes } from './ocr/routes.js';
 import type { OcrStore } from './ocr/store.js';
 import type { ReviewStore } from './review/store.js';
 import { registerReviewRoutes } from './review/routes.js';
+import { registerGroceryDashboardRoutes, type GroceryDashboardStore } from './grocery/dashboard.js';
+import { createUtilityRouter } from './utilities/routes.js';
 
-export function createApp({ database, registerRoutes, auth, grocery, gas, analytics, receipts, ocr, review }: {
+export function createApp({ database, registerRoutes, auth, grocery, gas, analytics, receipts, ocr, review, utilities, groceryDashboard }: {
   database: DatabaseProbe;
   registerRoutes?: (app: Express) => void;
   auth?: AuthServices;
@@ -26,6 +29,8 @@ export function createApp({ database, registerRoutes, auth, grocery, gas, analyt
   receipts?: ReceiptServices;
   ocr?: OcrStore;
   review?: ReviewStore;
+  groceryDashboard?: GroceryDashboardStore;
+  utilities?: { pool: Pool };
 }): Express {
   const app = express();
   app.disable('x-powered-by');
@@ -56,6 +61,12 @@ export function createApp({ database, registerRoutes, auth, grocery, gas, analyt
   if (auth && receipts) registerReceiptRoutes(app, auth, receipts);
   if (auth && ocr) registerOcrRoutes(app, auth, ocr);
   if (auth && review) registerReviewRoutes(app, auth, review);
+  if (auth && groceryDashboard) registerGroceryDashboardRoutes(app, auth, groceryDashboard);
+  // Utility routes require the same verified Clerk account and local user synchronization.
+  if (auth && utilities) app.use('/api/utilities', createRequireUser(auth), createUtilityRouter({
+    pool: utilities.pool,
+    ownerId: (req) => (req as AuthRequest).authenticatedUser?.id,
+  }));
   registerRoutes?.(app);
   app.use(notFound);
   app.use(errorHandler);

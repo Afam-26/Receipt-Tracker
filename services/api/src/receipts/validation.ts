@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import { HttpError } from '../http/errors.js';
 
 export const MAX_RECEIPT_BYTES = 10 * 1024 * 1024;
-export type ReceiptType = 'grocery' | 'gas' | 'mixed' | 'unknown';
+export type ReceiptType = 'grocery' | 'gas' | 'utility' | 'mixed' | 'unknown';
 export type ReceiptImage = { bytes: Buffer; mimeType: 'image/jpeg'|'image/png'|'image/webp'|'application/pdf'; sha256: string };
 
 export function receiptId(value: unknown): string {
@@ -13,7 +13,7 @@ export function receiptId(value: unknown): string {
 }
 export function parseReceiptType(value: unknown): ReceiptType {
   if (value === undefined) return 'unknown';
-  if (typeof value !== 'string' || !['grocery','gas','mixed','unknown'].includes(value)) {
+  if (typeof value !== 'string' || !['grocery','gas','utility','mixed','unknown'].includes(value)) {
     throw new HttpError(400, 'INVALID_RECEIPT_TYPE', 'Invalid receipt type');
   }
   return value as ReceiptType;

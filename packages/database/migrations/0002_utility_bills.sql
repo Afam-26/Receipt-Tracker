@@ -1,0 +1,37 @@
+-- Utility bills are separate from grocery_line_items and gas_purchases.
+-- REVIEW against existing schema_migrations and user PK before running.
+-- New tables are created only, and this migration does not update existing records.
+CREATE TABLE IF NOT EXISTS utility_bills (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  user_id BIGINT UNSIGNED NOT NULL,
+  idempotency_key VARCHAR(100) NOT NULL,
+  category ENUM('electricity','water','natural_gas','internet','phone','trash','other') NOT NULL,
+  provider_name VARCHAR(160) NOT NULL,
+  account_label VARCHAR(100) NULL,
+  service_start DATE NOT NULL,
+  service_end DATE NOT NULL,
+  due_date DATE NULL,
+  currency_code CHAR(3) NOT NULL DEFAULT 'USD',
+  usage_amount DECIMAL(16,4) NULL,
+  usage_unit VARCHAR(24) NULL,
+  rate_per_unit DECIMAL(16,6) NULL,
+  base_charge DECIMAL(13,2) NULL,
+  taxes_fees DECIMAL(13,2) NULL,
+  total_amount DECIMAL(13,2) NULL,
+  notes VARCHAR(1000) NULL,
+  source_receipt_id BIGINT UNSIGNED NULL,
+  status ENUM('draft','confirmed') NOT NULL DEFAULT 'draft',
+  revision INT UNSIGNED NOT NULL DEFAULT 1,
+  confirmed_at DATETIME(3) NULL,
+  created_at DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  updated_at DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
+  PRIMARY KEY (id),
+  UNIQUE KEY uq_utility_owner_idempotency (user_id,idempotency_key),
+  KEY idx_utility_owner_history (user_id,category,service_end,id),
+  KEY idx_utility_owner_provider (user_id,provider_name,service_end),
+  KEY idx_utility_receipt (user_id,source_receipt_id),
+  CONSTRAINT fk_utility_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  CONSTRAINT ck_utility_service_period CHECK (service_start <= service_end),
+  CONSTRAINT ck_utility_total CHECK (total_amount IS NULL OR total_amount >= 0),
+  CONSTRAINT ck_utility_usage CHECK (usage_amount IS NULL OR usage_amount >= 0)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

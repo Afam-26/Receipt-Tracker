@@ -1,7 +1,9 @@
 /** Conservative receipt heuristics. All values are UNVERIFIED suggestions. */
+import { parseUtilityText, type UtilitySuggestions } from './utility-extract.js';
 export type Candidate = { value: string; evidence: string; confidence: 'low' | 'medium' };
 export type ParsedReceipt = {
-  receiptType: 'grocery' | 'gas' | 'mixed' | 'unknown';
+  receiptType: 'grocery' | 'gas' | 'utility' | 'mixed' | 'unknown';
+  utility?: UtilitySuggestions | null;
   merchant: Candidate | null; purchasedOn: Candidate | null; grandTotal: Candidate | null;
   groceryLines: Array<{ description: string; amount: string | null; evidence: string }>;
   gas: { grade: Candidate | null; gallons: Candidate | null; beforeRewardsPricePerGallon: Candidate | null; rewardsDiscountPerGallon: Candidate | null; paidPricePerGallon: Candidate | null };
@@ -10,7 +12,8 @@ export type ParsedReceipt = {
 const money=(v:string):string|null=> { const n=Number(v.replace(/,/g,''));return Number.isFinite(n)&&n>=0&&n<=9999999999.99?n.toFixed(2):null; };
 function candidate(value:string,evidence:string,confidence:'low'|'medium'='low'):Candidate {return {value,evidence:evidence.slice(0,240),confidence};}
 function matched(lines:string[],re:RegExp):{match:RegExpMatchArray;line:string}|null {for(const line of lines){const match=line.match(re);if(match)return {match,line};}return null;}
-export function parseReceiptText(input:string):ParsedReceipt {
+export function parseReceiptText(input:string, requestedType?:'grocery'|'gas'|'utility'|'mixed'|'unknown'):ParsedReceipt {
+  if(requestedType==='utility')return {receiptType:'utility',utility:parseUtilityText(input),merchant:null,purchasedOn:null,grandTotal:null,groceryLines:[],gas:{grade:null,gallons:null,beforeRewardsPricePerGallon:null,rewardsDiscountPerGallon:null,paidPricePerGallon:null},reviewWarnings:['Utility statement OCR is unverified. Review it in Utilities before creating a bill.']};
   const lines=input.split(/\r?\n/).map(x=>x.trim()).filter(Boolean).slice(0,350);
   const text=lines.join('\n');
   const gasSignal=/\b(?:fuel|gasoline|diesel|gallons?|\bgal\b|pump\s*#?|price\s*\/\s*gal)\b/i.test(text);

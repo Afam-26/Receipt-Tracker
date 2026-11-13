@@ -2,7 +2,7 @@ import { createPool, type Pool, type RowDataPacket, type ResultSetHeader } from 
 import type { ParsedReceipt } from './extract.js';
 
 type Row=RowDataPacket & Record<string,unknown>;
-export interface OcrJob {id:string;userId:string;receiptId:string;key:string;mimeType:string}
+export interface OcrJob {id:string;userId:string;receiptId:string;key:string;mimeType:string;receiptType:'grocery'|'gas'|'utility'|'mixed'|'unknown'}
 export interface OcrStore {
   enqueue(userId:string,receiptId:string):Promise<'not_found'|'busy'|string>;
   status(userId:string,receiptId:string):Promise<{processingStatus:string;jobStatus:string|null;attempts:number|null;extraction:{id:string;provider:string;createdAt:string;data:ParsedReceipt}|null}|null>;
@@ -39,12 +39,12 @@ export function createOcrStore(databaseUrl:string):OcrStore {
     async claim(){
       const cx=await pool.getConnection();try{
         await cx.beginTransaction();
-        const [rows]=await cx.query<Row[]>(`SELECT j.id,j.user_id AS userId,j.receipt_id AS receiptId FROM receipt_processing_jobs j WHERE j.status='queued' AND j.job_type='ocr' AND j.available_at<=NOW(3) ORDER BY j.id LIMIT 1 FOR UPDATE SKIP LOCKED`);
+        const [rows]=await cx.query<Row[]>(`SELECT j.id,j.user_id AS userId,j.receipt_id AS receiptId,r.receipt_type AS receiptType FROM receipt_processing_jobs j INNER JOIN receipts r ON r.id=j.receipt_id AND r.user_id=j.user_id WHERE j.status='queued' AND j.job_type='ocr' AND j.available_at<=NOW(3) ORDER BY j.id LIMIT 1 FOR UPDATE SKIP LOCKED`);
         if(!rows[0]){await cx.commit();return null;}
         const row=rows[0];const [files]=await cx.execute<Row[]>('SELECT storage_key AS storageKey,mime_type AS mimeType FROM receipt_files WHERE user_id=? AND receipt_id=? ORDER BY id LIMIT 1',[String(row.userId),String(row.receiptId)]);
         await cx.execute("UPDATE receipt_processing_jobs SET status='running',attempt_count=attempt_count+1,locked_at=NOW(3) WHERE id=?",[String(row.id)]);
         await cx.commit();
-        return {id:String(row.id),userId:String(row.userId),receiptId:String(row.receiptId),key:files[0]?String(files[0].storageKey):'',mimeType:files[0]?String(files[0].mimeType):''};
+        return {id:String(row.id),userId:String(row.userId),receiptId:String(row.receiptId),key:files[0]?String(files[0].storageKey):'',mimeType:files[0]?String(files[0].mimeType):'',receiptType:String(row.receiptType) as OcrJob['receiptType']};
       }catch(err){await cx.rollback();throw err;}finally{cx.release();}
     },
     async complete(job,result,rawText){
@@ -54,7 +54,7 @@ export function createOcrStore(databaseUrl:string):OcrStore {
         await cx.execute('INSERT INTO receipt_extractions(user_id,receipt_id,provider,provider_version,raw_result,confidence_data) VALUES (?,?,?,?,?,?)',
           [job.userId,job.receiptId,'self_hosted_tesseract','3b-v1',JSON.stringify(result),JSON.stringify({ocrCharacters:rawText.length,automaticallyConfirmed:false})]);
         await cx.execute("UPDATE receipts SET processing_status='needs_review',receipt_type=? WHERE user_id=? AND id=? AND processing_status='processing'",[result.receiptType,job.userId,job.receiptId]);
-        const reviewFields:Array<[string,unknown]>= [['receiptType',result.receiptType],['merchant',result.merchant],['purchasedOn',result.purchasedOn],['grandTotal',result.grandTotal],['gas',result.gas],['groceryLines',result.groceryLines]];
+        const reviewFields:Array<[string,unknown]>= [['receiptType',result.receiptType],['merchant',result.merchant],['purchasedOn',result.purchasedOn],['grandTotal',result.grandTotal],['gas',result.gas],['groceryLines',result.groceryLines],['utility',result.utility??null]];
         for(const [field,value] of reviewFields){await cx.execute('INSERT INTO receipt_review_issues(user_id,receipt_id,field_path,issue_type,proposed_value,status) VALUES (?,?,?,?,?,\'open\')',[job.userId,job.receiptId,field,'ocr_unverified',JSON.stringify(value)]);}
         await cx.execute('INSERT INTO audit_logs(user_id,entity_type,entity_id,action,after_data) VALUES (?,?,?,?,?)',[job.userId,'receipt',job.receiptId,'ocr_extracted',JSON.stringify({jobId:job.id,receiptType:result.receiptType,unverified:true})]);
         await cx.execute("UPDATE receipt_processing_jobs SET status='completed',completed_at=NOW(3),locked_at=NULL,last_error=NULL WHERE id=? AND user_id=? AND status='running'",[job.id,job.userId]);
