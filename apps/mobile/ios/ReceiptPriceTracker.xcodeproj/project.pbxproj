@@ -7,31 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0227CE21F34AADA05309E496 /* libPods-ReceiptPriceTracker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C74C129B3F7C4A14D5E22BD4 /* libPods-ReceiptPriceTracker.a */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
-		41F384BD9414EAA6DA1E508C /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF2CEB42B85C88110D7BA41 /* ExpoModulesProvider.swift */; };
-		5502ADB6689DC1B33FAFB44B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B366816C738312A78A744EB2 /* PrivacyInfo.xcprivacy */; };
+		6F8B31A6FEDF7EB8FDF94E2F /* libPods-ReceiptPriceTracker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4A97629D1D829A02C936C19 /* libPods-ReceiptPriceTracker.a */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
+		DD687B4AC55A36EFEF7371B5 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE203AB2DC0BA441643A309 /* ExpoModulesProvider.swift */; };
 		F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11748412D0307B40044C1D9 /* AppDelegate.swift */; };
 		F11748442D0307B40044C1D9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11748432D0307B40044C1D9 /* SceneDelegate.swift */; };
+		F1C5C267C8DFFCCE54D99FA8 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B130EE17383C0A8BECC58471 /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		13B07F961A680F5B00A75B9A /* ReceiptPriceTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReceiptPriceTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ReceiptPriceTracker/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ReceiptPriceTracker/Info.plist; sourceTree = "<group>"; };
-		1EF2CEB42B85C88110D7BA41 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-ReceiptPriceTracker/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
+		1AE203AB2DC0BA441643A309 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-ReceiptPriceTracker/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
+		91416757A955108961E6B720 /* Pods-ReceiptPriceTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReceiptPriceTracker.debug.xcconfig"; path = "Target Support Files/Pods-ReceiptPriceTracker/Pods-ReceiptPriceTracker.debug.xcconfig"; sourceTree = "<group>"; };
+		9CB4A85BDDF11D860DD55633 /* Pods-ReceiptPriceTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReceiptPriceTracker.release.xcconfig"; path = "Target Support Files/Pods-ReceiptPriceTracker/Pods-ReceiptPriceTracker.release.xcconfig"; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = ReceiptPriceTracker/SplashScreen.storyboard; sourceTree = "<group>"; };
-		B366816C738312A78A744EB2 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = ReceiptPriceTracker/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		B130EE17383C0A8BECC58471 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = ReceiptPriceTracker/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
-		BE1674F745CC6C9C9ED4EF84 /* Pods-ReceiptPriceTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReceiptPriceTracker.release.xcconfig"; path = "Target Support Files/Pods-ReceiptPriceTracker/Pods-ReceiptPriceTracker.release.xcconfig"; sourceTree = "<group>"; };
-		C74C129B3F7C4A14D5E22BD4 /* libPods-ReceiptPriceTracker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ReceiptPriceTracker.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4A97629D1D829A02C936C19 /* libPods-ReceiptPriceTracker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ReceiptPriceTracker.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F11748412D0307B40044C1D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ReceiptPriceTracker/AppDelegate.swift; sourceTree = "<group>"; };
 		F11748432D0307B40044C1D9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SceneDelegate.swift; path = ReceiptPriceTracker/SceneDelegate.swift; sourceTree = "<group>"; };
 		F11748442D0722820044C1D9 /* ReceiptPriceTracker-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "ReceiptPriceTracker-Bridging-Header.h"; path = "ReceiptPriceTracker/ReceiptPriceTracker-Bridging-Header.h"; sourceTree = "<group>"; };
-		F5EE2442BFBEDAF6A6356F8B /* Pods-ReceiptPriceTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReceiptPriceTracker.debug.xcconfig"; path = "Target Support Files/Pods-ReceiptPriceTracker/Pods-ReceiptPriceTracker.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,7 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0227CE21F34AADA05309E496 /* libPods-ReceiptPriceTracker.a in Frameworks */,
+				6F8B31A6FEDF7EB8FDF94E2F /* libPods-ReceiptPriceTracker.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,7 +56,7 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
-				B366816C738312A78A744EB2 /* PrivacyInfo.xcprivacy */,
+				B130EE17383C0A8BECC58471 /* PrivacyInfo.xcprivacy */,
 			);
 			name = ReceiptPriceTracker;
 			sourceTree = "<group>";
@@ -65,9 +65,25 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				C74C129B3F7C4A14D5E22BD4 /* libPods-ReceiptPriceTracker.a */,
+				E4A97629D1D829A02C936C19 /* libPods-ReceiptPriceTracker.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4796D4C58A191CDB723C4E60 /* ExpoModulesProviders */ = {
+			isa = PBXGroup;
+			children = (
+				4BE76D2D3780A6E9AF2D2C9B /* ReceiptPriceTracker */,
+			);
+			name = ExpoModulesProviders;
+			sourceTree = "<group>";
+		};
+		4BE76D2D3780A6E9AF2D2C9B /* ReceiptPriceTracker */ = {
+			isa = PBXGroup;
+			children = (
+				1AE203AB2DC0BA441643A309 /* ExpoModulesProvider.swift */,
+			);
+			name = ReceiptPriceTracker;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -84,8 +100,8 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				FA395C4BD775394E04BB3D33 /* Pods */,
-				9CD1A57700DAC23E59570376 /* ExpoModulesProviders */,
+				D16A27B38E6D80E7CB6FF7A1 /* Pods */,
+				4796D4C58A191CDB723C4E60 /* ExpoModulesProviders */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -100,22 +116,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9CD1A57700DAC23E59570376 /* ExpoModulesProviders */ = {
-			isa = PBXGroup;
-			children = (
-				A712CEA1204D2772188BC7FD /* ReceiptPriceTracker */,
-			);
-			name = ExpoModulesProviders;
-			sourceTree = "<group>";
-		};
-		A712CEA1204D2772188BC7FD /* ReceiptPriceTracker */ = {
-			isa = PBXGroup;
-			children = (
-				1EF2CEB42B85C88110D7BA41 /* ExpoModulesProvider.swift */,
-			);
-			name = ReceiptPriceTracker;
-			sourceTree = "<group>";
-		};
 		BB2F792B24A3F905000567C9 /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
@@ -125,11 +125,11 @@
 			path = ReceiptPriceTracker/Supporting;
 			sourceTree = "<group>";
 		};
-		FA395C4BD775394E04BB3D33 /* Pods */ = {
+		D16A27B38E6D80E7CB6FF7A1 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F5EE2442BFBEDAF6A6356F8B /* Pods-ReceiptPriceTracker.debug.xcconfig */,
-				BE1674F745CC6C9C9ED4EF84 /* Pods-ReceiptPriceTracker.release.xcconfig */,
+				91416757A955108961E6B720 /* Pods-ReceiptPriceTracker.debug.xcconfig */,
+				9CB4A85BDDF11D860DD55633 /* Pods-ReceiptPriceTracker.release.xcconfig */,
 			);
 			name = Pods;
 			path = Pods;
@@ -143,14 +143,14 @@
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "ReceiptPriceTracker" */;
 			buildPhases = (
 				08A4A3CD28434E44B6B9DE2E /* [CP] Check Pods Manifest.lock */,
-				5A56BC37A700AE0499ADD631 /* [Expo] Configure project */,
+				097F9E283FA45BA5E22AD1F3 /* [Expo] Configure project */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */,
-				64194F6F4872439DBCB70F98 /* [Expo Dev Launcher] Strip Local Network Keys for Release */,
-				17976FD5E2B57E196ABE9A42 /* [CP] Embed Pods Frameworks */,
+				0FC53C472253419E8E4A60D5 /* [Expo Dev Launcher] Strip Local Network Keys for Release */,
+				1A6F2193F098574B50657AD8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -170,8 +170,8 @@
 				LastUpgradeCheck = 1130;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = G24M6CF537;
 						LastSwiftMigration = 1250;
+						DevelopmentTeam = "G24M6CF537";
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -202,7 +202,7 @@
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
-				5502ADB6689DC1B33FAFB44B /* PrivacyInfo.xcprivacy in Resources */,
+				F1C5C267C8DFFCCE54D99FA8 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,7 +248,45 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		17976FD5E2B57E196ABE9A42 /* [CP] Embed Pods Frameworks */ = {
+		097F9E283FA45BA5E22AD1F3 /* [Expo] Configure project */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/.xcode.env",
+				"$(SRCROOT)/.xcode.env.local",
+				"$(SRCROOT)/ReceiptPriceTracker/ReceiptPriceTracker.entitlements",
+				"$(SRCROOT)/Pods/Target Support Files/Pods-ReceiptPriceTracker/expo-configure-project.sh",
+			);
+			name = "[Expo] Configure project";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(SRCROOT)/Pods/Target Support Files/Pods-ReceiptPriceTracker/ExpoModulesProvider.swift",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-ReceiptPriceTracker/expo-configure-project.sh\"\n";
+		};
+		0FC53C472253419E8E4A60D5 /* [Expo Dev Launcher] Strip Local Network Keys for Release */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[Expo Dev Launcher] Strip Local Network Keys for Release";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Strip dev-launcher-specific local network permission keys from release builds.\n# This only removes _expo._tcp Bonjour services and the dev-launcher usage description.\n# Other Bonjour services and custom descriptions are preserved for production use.\n#\n# Detect debug builds via the DEBUG compile condition rather than the configuration name,\n# so custom debug configurations (e.g. \"Dev\", \"Staging\") that define DEBUG keep the keys.\ncase \" $SWIFT_ACTIVE_COMPILATION_CONDITIONS \" in\n  *\" DEBUG \"*) IS_DEBUG_BUILD=1 ;;\n  *) IS_DEBUG_BUILD=0 ;;\nesac\n\nif [ \"$IS_DEBUG_BUILD\" != \"1\" ]; then\n  PLIST_PATH=\"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n  if [ -f \"$PLIST_PATH\" ]; then\n    # Check if NSBonjourServices exists\n    if /usr/libexec/PlistBuddy -c \"Print :NSBonjourServices\" \"$PLIST_PATH\" >/dev/null 2>&1; then\n      # Get the count of services\n      COUNT=$(/usr/libexec/PlistBuddy -c \"Print :NSBonjourServices\" \"$PLIST_PATH\" 2>/dev/null | grep \"^    \" | wc -l | tr -d ' ')\n\n      # Remove _expo._tcp\n      for ((i=COUNT-1; i>=0; i--)); do\n        SERVICE=$(/usr/libexec/PlistBuddy -c \"Print :NSBonjourServices:$i\" \"$PLIST_PATH\" 2>/dev/null || echo \"\")\n        if echo \"$SERVICE\" | grep -q \"_expo._tcp\"; then\n          /usr/libexec/PlistBuddy -c \"Delete :NSBonjourServices:$i\" \"$PLIST_PATH\" 2>/dev/null || true\n        fi\n      done\n\n      # If the array is now empty, remove it entirely\n      REMAINING=$(/usr/libexec/PlistBuddy -c \"Print :NSBonjourServices\" \"$PLIST_PATH\" 2>/dev/null | grep \"^    \" | wc -l | tr -d ' ')\n      if [ \"$REMAINING\" -eq \"0\" ]; then\n        /usr/libexec/PlistBuddy -c \"Delete :NSBonjourServices\" \"$PLIST_PATH\" 2>/dev/null || true\n      fi\n    fi\n\n    # Only delete the description if it matches the dev-launcher default text\n    DESC=$(/usr/libexec/PlistBuddy -c \"Print :NSLocalNetworkUsageDescription\" \"$PLIST_PATH\" 2>/dev/null || echo \"\")\n    if echo \"$DESC\" | grep -q \"Expo Dev Launcher\"; then\n      /usr/libexec/PlistBuddy -c \"Delete :NSLocalNetworkUsageDescription\" \"$PLIST_PATH\" 2>/dev/null || true\n    fi\n  fi\nfi\n";
+		};
+		1A6F2193F098574B50657AD8 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -291,44 +329,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ReceiptPriceTracker/Pods-ReceiptPriceTracker-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		5A56BC37A700AE0499ADD631 /* [Expo] Configure project */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/.xcode.env",
-				"$(SRCROOT)/.xcode.env.local",
-				"$(SRCROOT)/ReceiptPriceTracker/ReceiptPriceTracker.entitlements",
-				"$(SRCROOT)/Pods/Target Support Files/Pods-ReceiptPriceTracker/expo-configure-project.sh",
-			);
-			name = "[Expo] Configure project";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(SRCROOT)/Pods/Target Support Files/Pods-ReceiptPriceTracker/ExpoModulesProvider.swift",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-ReceiptPriceTracker/expo-configure-project.sh\"\n";
-		};
-		64194F6F4872439DBCB70F98 /* [Expo Dev Launcher] Strip Local Network Keys for Release */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[Expo Dev Launcher] Strip Local Network Keys for Release";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Strip dev-launcher-specific local network permission keys from release builds.\n# This only removes _expo._tcp Bonjour services and the dev-launcher usage description.\n# Other Bonjour services and custom descriptions are preserved for production use.\n#\n# Detect debug builds via the DEBUG compile condition rather than the configuration name,\n# so custom debug configurations (e.g. \"Dev\", \"Staging\") that define DEBUG keep the keys.\ncase \" $SWIFT_ACTIVE_COMPILATION_CONDITIONS \" in\n  *\" DEBUG \"*) IS_DEBUG_BUILD=1 ;;\n  *) IS_DEBUG_BUILD=0 ;;\nesac\n\nif [ \"$IS_DEBUG_BUILD\" != \"1\" ]; then\n  PLIST_PATH=\"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n  if [ -f \"$PLIST_PATH\" ]; then\n    # Check if NSBonjourServices exists\n    if /usr/libexec/PlistBuddy -c \"Print :NSBonjourServices\" \"$PLIST_PATH\" >/dev/null 2>&1; then\n      # Get the count of services\n      COUNT=$(/usr/libexec/PlistBuddy -c \"Print :NSBonjourServices\" \"$PLIST_PATH\" 2>/dev/null | grep \"^    \" | wc -l | tr -d ' ')\n\n      # Remove _expo._tcp\n      for ((i=COUNT-1; i>=0; i--)); do\n        SERVICE=$(/usr/libexec/PlistBuddy -c \"Print :NSBonjourServices:$i\" \"$PLIST_PATH\" 2>/dev/null || echo \"\")\n        if echo \"$SERVICE\" | grep -q \"_expo._tcp\"; then\n          /usr/libexec/PlistBuddy -c \"Delete :NSBonjourServices:$i\" \"$PLIST_PATH\" 2>/dev/null || true\n        fi\n      done\n\n      # If the array is now empty, remove it entirely\n      REMAINING=$(/usr/libexec/PlistBuddy -c \"Print :NSBonjourServices\" \"$PLIST_PATH\" 2>/dev/null | grep \"^    \" | wc -l | tr -d ' ')\n      if [ \"$REMAINING\" -eq \"0\" ]; then\n        /usr/libexec/PlistBuddy -c \"Delete :NSBonjourServices\" \"$PLIST_PATH\" 2>/dev/null || true\n      fi\n    fi\n\n    # Only delete the description if it matches the dev-launcher default text\n    DESC=$(/usr/libexec/PlistBuddy -c \"Print :NSLocalNetworkUsageDescription\" \"$PLIST_PATH\" 2>/dev/null || echo \"\")\n    if echo \"$DESC\" | grep -q \"Expo Dev Launcher\"; then\n      /usr/libexec/PlistBuddy -c \"Delete :NSLocalNetworkUsageDescription\" \"$PLIST_PATH\" 2>/dev/null || true\n    fi\n  fi\nfi\n";
 		};
 		800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -379,7 +379,7 @@
 			files = (
 				F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */,
 				F11748442D0307B40044C1D9 /* SceneDelegate.swift in Sources */,
-				41F384BD9414EAA6DA1E508C /* ExpoModulesProvider.swift in Sources */,
+				DD687B4AC55A36EFEF7371B5 /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,15 +388,12 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F5EE2442BFBEDAF6A6356F8B /* Pods-ReceiptPriceTracker.debug.xcconfig */;
+			baseConfigurationReference = 91416757A955108961E6B720 /* Pods-ReceiptPriceTracker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ReceiptPriceTracker/ReceiptPriceTracker.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = G24M6CF537;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -423,20 +420,20 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
+				DEVELOPMENT_TEAM = "G24M6CF537";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 			};
 			name = Debug;
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BE1674F745CC6C9C9ED4EF84 /* Pods-ReceiptPriceTracker.release.xcconfig */;
+			baseConfigurationReference = 9CB4A85BDDF11D860DD55633 /* Pods-ReceiptPriceTracker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ReceiptPriceTracker/ReceiptPriceTracker.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = G24M6CF537;
 				INFOPLIST_FILE = ReceiptPriceTracker/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -457,6 +454,9 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
+				DEVELOPMENT_TEAM = "G24M6CF537";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 			};
 			name = Release;
 		};
